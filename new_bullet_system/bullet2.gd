@@ -24,6 +24,8 @@ var effects : Array
 signal hit_wall(collider, bullet)
 signal hit_enemy(collider, bullet)
 signal hit_ally(collider, bullet)
+signal startup(collider, bullet)
+signal movement(collider, bullet)
 
 
 func _init(new_start : Vector2, new_move_dir : Vector2, new_speed : float,bullet_rotation :float, new_effects : Array = [])-> void:	
@@ -32,6 +34,7 @@ func _init(new_start : Vector2, new_move_dir : Vector2, new_speed : float,bullet
 	for effect in effects:
 		effect.connect_stuff(self)
 	
+	emit_signal("startup", {}, self)
 	starting_position = new_start
 	move_dir = new_move_dir.normalized()
 	speed = new_speed
@@ -93,3 +96,4 @@ func update_lifetime(delta :float)-> bool:
 
 func update_positiion(delta : float)-> void:
 	current_positon += move_dir.normalized() * speed * delta
+	emit_signal("movement", {}, self)

@@ -6,7 +6,9 @@ extends Object
 enum TRIGGER_TYPE{
 	ON_WALL_HIT,
 	ON_ENEMY_HIT,
-	ON_ALLY_HIT
+	ON_ALLY_HIT,
+	ON_STARTUP,
+	ON_MOVE
 	
 }
 
@@ -26,8 +28,12 @@ func connect_stuff(bullet)-> void:
 				bullet.connect("hit_enemy", self, "effect")
 			TRIGGER_TYPE.ON_ALLY_HIT:
 				bullet.connect("hit_ally", self, "effect")
-
-
+			TRIGGER_TYPE.ON_STARTUP:
+				bullet.connect("startup", self, "effect")
+			TRIGGER_TYPE.ON_MOVE:
+				bullet.connect("movement", self, "effect")
+				
+				
 # detects to see if the effect should work
 func effect_condition(collision :Dictionary, bullet)-> bool:
 	return true
