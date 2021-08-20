@@ -32,23 +32,31 @@ func _process(delta)-> void:
 			for i in bullets_spawned:
 				var bullet_rotation = deg2rad(rand_range(-90, 90))
 				var move_dir = get_global_mouse_position().normalized().rotated(bullet_rotation)
-				bullets.append( bullet2.new(
-						global_position,
-						move_dir, 
-						500.0, 
-						bullet_rotation,
-
-						# effects here
-						[preload("res://new_bullet_system/bouncy_bullets.gd").new()]
-						
-						) 
-						
-					)
-
+				add_bullet(global_position, move_dir, 500, bullet_rotation)
+				
+				
 			yield(get_tree().create_timer(firerate), "timeout")
 			is_firing = false
+
+
+
+func add_bullet(
+		bullet_position :Vector2, 
+		move_dir :Vector2,
+		speed : float = 500, 
+		bullet_rotation : float = 0):
+
+	bullets.append( bullet2.new(
+			global_position,
+			move_dir, 
+			speed, 
+			bullet_rotation,
+			[preload("res://new_bullet_system/bouncy_bullets.gd").new()]
 			
-		
+			) 
+			
+		)			
+
 func _physics_process(delta)-> void:
 	var bullets_that_must_be_destroyed : Array
 	actual_spaned = bullets.size()
