@@ -37,6 +37,8 @@ func _process(delta)-> void:
 						move_dir, 
 						500.0, 
 						bullet_rotation,
+
+						# effects here
 						[preload("res://new_bullet_system/bouncy_bullets.gd").new()]
 						
 						) 
