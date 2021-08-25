@@ -15,7 +15,7 @@ var move_dir: Vector2
 var speed : float
 var texture : Texture = preload("res://icon.png") 
 var offset : Vector2
-var max_lifetime :float = 3
+var max_lifetime :float = 100
 var current_lifetime : float
 var global_space_state : Physics2DDirectSpaceState
 var hitbox : Shape2D
